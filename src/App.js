@@ -1,26 +1,23 @@
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">  
-      
-      <Job salary = {20000} position = "CEO" company = "Google" />
-
-    </div>
-  );
+  
+  const age = 21; 
+  const isGreen = true;
+  
+  
+  return <div className="App"> 
+  {age >= 18 ? <h1>Is over age</h1> : <h1> is under age</h1>}
+  <h1 style= {{color: isGreen ? "green" : "red"}}> THIS HAS COLOR</h1>
+  </div>  
+  
+  
+  
+  
 }
 
 
-const Job = (props) => {
 
- return (
-  <div>
-  <h1> {props.salary} </h1>
-  <h1> {props.position}</h1>
-  <h1> {props.company}</h1>
-  </div>
-);
-};
 
 
 
