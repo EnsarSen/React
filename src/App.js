@@ -1,26 +1,21 @@
 import './App.css';
-
+import {User} from './User'
 function App() {
-  
-  const age = 21; 
-  const isGreen = true;
-  
-  
-  return <div className="App"> 
-  {age >= 18 ? <h1>Is over age</h1> : <h1> is under age</h1>}
-  <h1 style= {{color: isGreen ? "green" : "red"}}> THIS HAS COLOR</h1>
-  </div>  
-  
-  
-  
-  
+const users = [
+{name: "Ensar", age: 16},
+{name: "Mehlika", age: 22},
+{name: "Asiye", age : 42},
+];
+
+
+
+return (<div className="App"> 
+
+  {users.map ((user , key) => {
+  return <User name={user.name} age ={user.age}/>;
+})}
+</div>
+);
 }
-
-
-
-
-
-
-
 
 export default App;
