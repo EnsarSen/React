@@ -1,23 +1,20 @@
 import './App.css';
-import {Planet} from './User'
+import { useState } from 'react'
+
 function App() {
 
-const planets = [
-{name: "Mars", isGasPlanet: false},
-{name: "Earth", isGasPlanet: false},
-{name: "Jupiter", isGasPlanet: true},
-{name: "Venus", isGasPlanet: false},
-{name: "Neptune", isGasPlanet: true},
-{name:  "Uranus", isGasPlanet: true},
-];
+const[inputValue, setInputValue] = useState("");
 
-return <div className="App"> 
-
-{planets.map((planet, key) => {
-    return planet.isGasPlanet  && <h1>{planet.name}</h1>
-})}
-
-</div>
+const handleInputChange = (event) =>{
+ setInputValue(event.target.value)
 }
+   
+return( <div className="App"> 
+<input  type="text" onChange={handleInputChange}/>
+{inputValue}
+</div>
+);
+}
+
 
 export default App;
