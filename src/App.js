@@ -3,15 +3,12 @@ import { useState } from 'react'
 
 function App() {
 
-const[inputValue, setInputValue] = useState("");
+const[showText, setShowText] = useState(true);
 
-const handleInputChange = (event) =>{
- setInputValue(event.target.value)
-}
-   
+
 return( <div className="App"> 
-<input  type="text" onChange={handleInputChange}/>
-{inputValue}
+    <button onClick={ () => {setShowText (!showText)}}>Show/Hide</button>
+  {showText === true && <h1> HI MY NAME IS ENSAR</h1>}
 </div>
 );
 }
