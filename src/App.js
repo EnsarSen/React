@@ -3,12 +3,12 @@ import { useState } from 'react'
 
 function App() {
 
-const[showText, setShowText] = useState(true);
+const[textColor, setTextColor] = useState("black");
 
 
 return( <div className="App"> 
-    <button onClick={ () => {setShowText (!showText)}}>Show/Hide</button>
-  {showText === true && <h1> HI MY NAME IS ENSAR</h1>}
+    <button onClick={ () => {setTextColor(textColor === "black" ? "red" : "black")}}>Show/Hide</button>
+  <h1 style = {{color: textColor}}> HI MY NAME IS ENSAR</h1>
 </div>
 );
 }
