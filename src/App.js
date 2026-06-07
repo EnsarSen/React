@@ -1,19 +1,49 @@
 import './App.css';
 import { useState } from 'react'
-
+import {Task} from './Task'
 function App() {
+   const [todoList,setTodoList] = useState([]);
+   const [newTask,setNewTask] = useState("");
+   
+  const handleChange = (event)=>{
+      setNewTask(event.target.value);
+  };
 
-const[count, setCount] = useState(0);
+  const addTask = () => {
+      const task = {
+         id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+         taskName: newTask,
+         completed: false
+      }
+   setTodoList([...todoList, task]);
+  };
+ 
+  const deleteTask =(id) => {
+      setTodoList(todoList.filter((task) => task.id !== id))
+  };
 
-
-return( <div className="App"> 
-   <button onClick={() => {setCount(count + 1)}}> Increase </button>
-   <button onClick={() => {setCount(count - 1)}}> Decrease </button>
-   <button onClick={() => {setCount(0)}}> Set to Zero </button>
-{count}
-</div>
-);
+  const isCompleted = (id) => {
+    setTodoList(todoList.map((task) => 
+        task.id !== id ? {...task, completed: false } : {...task, completed: true} 
+    ))
 }
+  return( 
+   <div className="App"> 
+  
+  <div className ="addTask">
+   <input onChange={handleChange} />
+   <button onClick={addTask}>Add Task</button>
+  </div>
+  
+  <div className="list">
+      {todoList.map((task) => {
+         return <Task taskName ={task.taskName} id = {task.id} deleteTask={deleteTask} isCompleted={isCompleted} completed={task.completed}/>
+      })}
+  </div>
+     
+ </div>
+);
+ }
 
 
 export default App;
