@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { Task } from "./Projects/Task";
+import { Task } from "./Task";
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [newTask, setNewTask] = useState("");
