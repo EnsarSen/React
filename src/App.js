@@ -1,55 +1,26 @@
 import "./App.css";
+import Axios from "axios";
 import { useState } from "react";
-import { Task } from "./Projects/Task";
+
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  const [newTask, setNewTask] = useState("");
+  const [genExcuse, setGenExcuse] = useState("");
 
-  const handleChange = (event) => {
-    setNewTask(event.target.value);
-  };
-
-  const addTask = () => {
-    const task = {
-      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
-      taskName: newTask,
-      completed: false,
-    };
-    setTodoList([...todoList, task]);
-  };
-
-  const deleteTask = (id) => {
-    setTodoList(todoList.filter((task) => task.id !== id));
-  };
-
-  const isCompleted = (id) => {
-    setTodoList(
-      todoList.map((task) =>
-        task.id === id ? { ...task, completed: true } : task,
-      ),
+  const fetchData = (excuse) => {
+    Axios.get(`https://excuser-three.vercel.app/v1/excuse/${excuse}/`).then(
+      (res) => {
+        setGenExcuse(res.data[0].excuse);
+      },
     );
   };
 
   return (
     <div className="App">
-      <div className="addTask">
-        <h1 style={{ color: "purple" }}>Ensar's Todo List</h1>
-        <br />
-        <input onChange={handleChange} />
-        <button onClick={addTask}> Add Task</button>
-      </div>
+      <h1>Generate An Excuse</h1>
+      <button onClick={() => fetchData("party")}> Party </button>
+      <button onClick={() => fetchData("family")}> Family </button>
+      <button onClick={() => fetchData("office")}> Office </button>
 
-      <div className="list">
-        {todoList.map((task) => (
-          <Task
-            taskName={task.taskName}
-            deleteTask={deleteTask}
-            completed={task.completed}
-            id={task.id}
-            isCompleted={isCompleted}
-          />
-        ))}
-      </div>
+      <p>{genExcuse}</p>
     </div>
   );
 }
